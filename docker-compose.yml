@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  simplewebapi:
-    image: ${DOCKER_REGISTRY-}simplewebapi
-    build:
-      context: .
-      dockerfile: SimpleWebAPI/Dockerfile
