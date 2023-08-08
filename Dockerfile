@@ -21,5 +21,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "SimpleWebAPI.dll"]
+#CMD ["/bin/bash"]
 
 
