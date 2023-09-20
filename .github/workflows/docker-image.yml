@@ -19,17 +19,11 @@ jobs:
     
     - name: Push Docker image to Docker Hub
       run: |
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/simple-web-api-gh:latest
+        docker push arielschwindt/simple-web-api-gh:latest
       continue-on-error: true # Continuar incluso si la carga falla
 
     - name: Clean up
       run: docker logout
       if: always() # Se ejecutará incluso si un paso anterior falla
 
-  notify:
-    runs-on: ubuntu-latest
-    needs: build
-    if: failure() # Ejecutar solo si el trabajo de construcción falló
-    steps:
-    - name: Send failure notification
-      run: echo "La construcción y carga de la imagen de Docker fallaron. Por favor, verifique el flujo de trabajo."
+ 
