@@ -1,0 +1,40 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - main  # Cambia 'main' por la rama en la que deseas que se ejecute el flujo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.x  # Cambia a la versión exacta de .NET Core 7.0 que estás utilizando
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Publish
+      run: dotnet publish --configuration Release --output ./publish
+
+    - name: Deploy to server (if applicable)
+      # Agrega los comandos o scripts necesarios para implementar en tu servidor aquí
+      # Esto dependerá de tu configuración específica
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: app
+        path: ./publish
+
+# Agrega más pasos según tus necesidades, como configurar un servidor de pruebas, ejecutar pruebas, etc.
